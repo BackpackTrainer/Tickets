@@ -1,0 +1,24 @@
+package unitTests;
+
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+
+import org.junit.Test;
+
+public class PricingTests {
+
+	@Test
+	public void test() {
+		LocalDate startDate = LocalDate.of(2021,  Month.APRIL,  16);
+		LocalDate endDate = startDate.plusDays(100);
+		long expectedResult = 100;
+		
+		long numberOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+		
+		assertTrue(expectedResult == numberOfDaysBetween);
+	}
+
+}

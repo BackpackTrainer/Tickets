@@ -1,0 +1,44 @@
+package unitTests;
+
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+
+import org.junit.Test;
+
+public class PricingTests {
+
+	@Test
+	public void test() {
+//		This first test isn't really testing anything.  It is here to show 
+//		the syntax of creating dates, adding days to dates, and calculating
+//		the difference (in days) between 2 dates
+			
+		LocalDate startDate = LocalDate.of(2021,  04,  16);
+		LocalDate endDate = startDate.plusDays(100);
+		long expectedResult = 100;
+		
+		long numberOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+		
+		assertTrue(expectedResult == numberOfDaysBetween);
+	}
+	
+
+	@Test
+	public void anotherSyntaxTest() {
+//		This test isn't really testing anything.  It is here to show 
+//		the syntax of creating a date for today, adding days to that date, and calculating
+//		the difference (in days) between the 2 dates
+				
+		LocalDate eventDate = LocalDate.now();
+		LocalDate currentDate = eventDate.minusDays(50);
+		long expectedResult = 50;
+		
+		long numberOfDaysBetween = ChronoUnit.DAYS.between(currentDate, eventDate);
+		
+		assertTrue(expectedResult == numberOfDaysBetween);
+	}
+	
+}

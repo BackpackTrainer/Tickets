@@ -1,0 +1,32 @@
+package events;
+
+import java.time.LocalDate;
+
+import events.IVenue;
+
+public class Event {
+	
+	LocalDate ticketSaleDate;
+	double ticketPrice;
+	IVenue venue;
+	
+	public Event(IVenue venue) {
+		this.venue = venue;
+	}
+
+	public void setDateTicketsWentOnSale(LocalDate dateTicketsWentOnSale) {
+	
+	}
+
+	public void setTicketPrice(double ticketPrice) {
+		this.ticketPrice = ticketPrice;		
+	}
+
+	public void setTicketSalesBeginDate(LocalDate ticketSalesBeginDate) {
+		ticketSaleDate = ticketSalesBeginDate;			
+	}
+
+	public double getTicketPrice(LocalDate today) {
+		return ticketPrice;
+	}
+}

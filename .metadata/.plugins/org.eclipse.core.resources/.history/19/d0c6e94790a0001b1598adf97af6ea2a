@@ -1,0 +1,24 @@
+package unitTests;
+
+import java.time.LocalDate;
+
+public class Event {
+	
+	LocalDate ticketSaleDate;
+	int ticketPrice;
+
+	public void setDateTicketsWentOnSale(LocalDate dateTicketsWentOnSale) {
+	ticketSaleDate = dateTicketsWentOnSale;
+		
+	}
+
+	public void setTicketPrice(int ticketPrice) {
+		this.ticketPrice = ticketPrice;
+		
+	}
+
+	public int getTicketPrice() {
+		return ticketPrice;
+	}
+
+}

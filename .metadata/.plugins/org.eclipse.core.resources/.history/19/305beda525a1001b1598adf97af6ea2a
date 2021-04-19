@@ -1,0 +1,142 @@
+package unitTests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import events.Event;
+import events.IVenue;
+
+
+public class PricingTests {
+
+	int ticketsOnSaleDays;
+	LocalDate ticketSalesBeginDate;
+	int ticketsSold;
+	IVenue venue;
+	Event uut;
+	
+	LocalDate today = LocalDate.now();
+	double ticketPrice = 100.0;
+	int venueCapacity = 1000;
+	
+	@Before
+	public void setUp()  {
+		IVenue venue = new VenueTestStub();	
+		Event uut = new Event(venue);
+	}
+	
+	@After
+	public void tearDown()  {
+		venue = null;
+		uut = null;
+	}
+
+
+	@Test
+	public void testConstruction()  {
+
+		
+		assertNotNull(uut);
+	}
+	
+	@Test
+	public void testTicketsOnSaleLessThan30Days()  {
+		ticketsOnSaleDays = 29;
+		ticketSalesBeginDate = today.minusDays(ticketsOnSaleDays);
+			
+		uut.setTicketPrice(ticketPrice);
+		uut.setTicketSalesBeginDate(ticketSalesBeginDate);
+		double actualTicketPrice = uut.getTicketPrice(today);
+		
+		assertEquals(ticketPrice, actualTicketPrice, .01);
+		
+	}
+	
+	@Test
+	public void testTicketsOnSaleFor30DaysVenueAt20PercentCapacity()  {
+		int ticketsOnSaleDays = 30;
+		LocalDate ticketSalesBeginDate = today.minusDays(ticketsOnSaleDays);
+		int venueCapacity = 1000;
+		int ticketsSold = 200;
+		
+		venue.setCapacity(venueCapacity);
+		uut.setTicketPrice(ticketPrice);
+		uut.setTicketSalesBeginDate(ticketSalesBeginDate);
+		generateTicketSales(ticketsSold);
+		double actualTicketPrice = uut.getTicketPrice(today);
+		
+		assertEquals(ticketPrice, actualTicketPrice, .01);
+	}
+	
+	private void generateTicketSales(int ticketsSold)  {
+		for (int i = 0; i<ticketsSold; i++)  {
+		uut.sellTicket();
+		}
+	}
+	
+	
+	
+//	@Test
+//	public void testFewerThan30DaysOnSale()  {
+//		long daysOnSale = 29;
+//		LocalDate today = LocalDate.now();
+//		LocalDate dateTicketsWentOnSale = today.minusDays(daysOnSale);
+//		int ticketPrice = 100;
+//		
+//		Event uut = new Event();
+//		uut.setDateTicketsWentOnSale(dateTicketsWentOnSale);
+//		uut.setTicketPrice(ticketPrice);
+//		
+//		int actualTicketPrice = uut.getTicketPrice(today);
+//		
+//		assertEquals(ticketPrice, actualTicketPrice);
+//		
+//	}
+//	
+//	@Test
+//	public void test30DaysOnSaleLessThan20PercentSold()  {
+//		long daysOnSale = 30;
+//		LocalDate today = LocalDate.now();
+//		LocalDate dateTicketsWentOnSale = today.minusDays(daysOnSale);
+//		int ticketPrice = 100;
+//		int seatingCapacity = 10000;
+//		int ticketsSold = 1999;
+//		double discountRate = .75;
+//		double premiumRate = 1.5;
+//		int expectedTicketPrice = (int)(ticketPrice*discountRate);
+//		
+//		Event uut = new Event();
+//		uut.setDateTicketsWentOnSale(dateTicketsWentOnSale);
+//		uut.setSeatingCapacity(seatingCapacity);
+//		uut.setTicketsSold(ticketsSold);
+//		uut.setTicketPrice(ticketPrice);
+//		
+//		int actualTicketPrice = uut.getTicketPrice(today);	
+//		
+//		assertEquals(ticketPrice, actualTicketPrice);
+//	}
+	
+	@Test
+	public void test() {
+//		This test isn't really testing anything.  It is here to show 
+//		the syntax of creating dates, adding days to dates, and calculating
+//		the difference (in days) between 2 dates
+			
+		LocalDate startDate = LocalDate.of(2021,  04,  16);
+		LocalDate endDate = startDate.plusDays(100);
+		long expectedResult = 100;
+		
+		long numberOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+		
+		assertTrue(expectedResult == numberOfDaysBetween);
+	}
+	
+}

@@ -1,0 +1,7 @@
+package unitTests;
+
+import events.IVenue;
+
+public class VenueTestStub implements IVenue {
+
+}
