@@ -42,7 +42,7 @@ public class Event {
 			actualTicketPrice = ticketPrice*discountRate;
 			}
 			
-			else if(percentTicketsSold > .30) {
+			else if(percentTicketsSold > .80) {
 			actualTicketPrice = ticketPrice*premiumRate;
 			}
 		}	
