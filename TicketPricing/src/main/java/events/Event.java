@@ -13,8 +13,9 @@ public class Event {
 	double discountRate = .75;
 	double premiumRate = 1.50;
 	
-	public Event(IVenue venue) {
+	public Event(IVenue venue, LocalDate ticketSaleDate) {
 		this.venue = venue;
+		this.ticketSaleDate = ticketSaleDate;
 	}
 
 	public void setDateTicketsWentOnSale(LocalDate dateTicketsWentOnSale) {
@@ -23,10 +24,6 @@ public class Event {
 
 	public void setTicketPrice(double ticketPrice) {
 		this.ticketPrice = ticketPrice;		
-	}
-
-	public void setTicketSalesBeginDate(LocalDate ticketSalesBeginDate) {
-		ticketSaleDate = ticketSalesBeginDate;			
 	}
 
 	public double getTicketPrice(LocalDate today) {
